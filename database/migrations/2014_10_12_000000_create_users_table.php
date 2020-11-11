@@ -12,15 +12,25 @@ class CreateUsersTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   
+        Schema::disableForeignKeyConstraints();
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->bigIncrements('id');
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('pseudo');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+            $table->string('tel');
+            $table->string('adresse');
+            $table->date('date_naissance');
+            $table->string('avatar');
+            $table->unsignedBigInteger('user_competition_id');
+            $table->foreign('user_competition_id')->references('id')->on('user_competition')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
+            //$table->timestamp('email_verified_at')->nullable();
+            //$table->rememberToken();
+            
         });
     }
 
@@ -31,6 +41,14 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::table('users',function(Blueprint $table){
+            $table->dropForeign('users_user_competition_id_foreign');
+            
+        });
         Schema::dropIfExists('users');
+    }
+
+    public function user_competitions(){
+        return $this->hasMany(User_competition::class);
     }
 }
