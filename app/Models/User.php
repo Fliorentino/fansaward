@@ -53,4 +53,10 @@ class User extends Authenticatable
     public function annonces(){
         return $this->hasMany(Annonce::class);
     }
+    public function user_competitions(){
+        return $this->belongsTo(UserCompetition::class);
+    }
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
 }

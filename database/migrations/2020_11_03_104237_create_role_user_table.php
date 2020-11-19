@@ -4,13 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoleUsersTable extends Migration
+class CreateRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * Table pivot entre roles et users
      * @return void
      */
+
     public function up()
     {
         Schema::create('role_users', function (Blueprint $table) {
@@ -29,6 +30,6 @@ class CreateRoleUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_users');
+        Schema::dropIfExists('role_user');
     }
 }

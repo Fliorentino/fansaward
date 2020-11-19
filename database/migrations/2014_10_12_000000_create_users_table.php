@@ -47,8 +47,4 @@ class CreateUsersTable extends Migration
         });
         Schema::dropIfExists('users');
     }
-
-    public function user_competitions(){
-        return $this->hasMany(User_competition::class);
-    }
 }
